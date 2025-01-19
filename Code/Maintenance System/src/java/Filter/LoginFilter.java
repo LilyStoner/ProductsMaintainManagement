@@ -108,7 +108,7 @@ public class LoginFilter implements Filter {
         doBeforeProcessing(request, response);
          HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-        HttpSession session = req.getSession(false); // Không tạo session mới nếu không tồn tại
+        HttpSession session = req.getSession(false); 
         String uri = req.getServletPath();
 
         

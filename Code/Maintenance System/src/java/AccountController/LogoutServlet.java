@@ -57,7 +57,7 @@ public class LogoutServlet extends HttpServlet {
          HttpSession session = request.getSession();
         session.removeAttribute("accStaff");
         session.removeAttribute("accCus");
-        response.sendRedirect("LoginForm.jsp");
+        response.sendRedirect("HomePage.jsp");
     } 
 
     /** 
