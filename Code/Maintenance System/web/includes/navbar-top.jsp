@@ -202,29 +202,7 @@
 								</div>
 							</div>
 						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-flag dropdown-toggle" href="#" id="languageDropdown" data-bs-toggle="dropdown">
-								<img src="img/flags/us.png" alt="English">
-							</a>
-							<div class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
-								<a class="dropdown-item" href="#">
-									<img src="img/flags/us.png" alt="English" width="20" class="align-middle me-1">
-									<span class="align-middle">English</span>
-								</a>
-								<a class="dropdown-item" href="#">
-									<img src="img/flags/es.png" alt="Spanish" width="20" class="align-middle me-1">
-									<span class="align-middle">Spanish</span>
-								</a>
-								<a class="dropdown-item" href="#">
-									<img src="img/flags/ru.png" alt="Russian" width="20" class="align-middle me-1">
-									<span class="align-middle">Russian</span>
-								</a>
-								<a class="dropdown-item" href="#">
-									<img src="img/flags/de.png" alt="German" width="20" class="align-middle me-1">
-									<span class="align-middle">German</span>
-								</a>
-							</div>
-						</li>
+					
 						<li class="nav-item">
 							<a class="nav-icon js-fullscreen d-none d-lg-block" href="#">
 								<div class="position-relative">
@@ -244,9 +222,10 @@
 									Privacy</a>
 								<a class="dropdown-item" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-help-circle align-middle me-1"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> Help Center</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
+								<a class="dropdown-item" href="logout">Log out</a>
 							</div>
 						</li>
+                                            <a>
 					</ul>
 				</div>
 			</nav>
