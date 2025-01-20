@@ -15,30 +15,7 @@
 
     <link href="css/light.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #f2f2f2;
-            text-align: left;
-        }
-
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-
-        h2, h3 {
-            text-align: center;
-        }
-    </style>
 </head>
 
 <body>
@@ -51,6 +28,7 @@
 
                 <h2>Customer Management</h2>
 
+                <!-- Search Form -->
                 <form action="customer" method="get" style="text-align: center; margin-bottom: 20px;">
                     <input type="hidden" name="action" value="search" />
                     <input type="text" name="text" placeholder="Search by name" value="${textSearch}" />
@@ -60,7 +38,7 @@
                 <c:choose>
                     <c:when test="${not empty listSearchCustomer}">
                         <h3>Search Results for "${textSearch}"</h3>
-                        <table>
+                        <table class="table table-hover my-0">
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
@@ -89,7 +67,7 @@
 
                     <c:otherwise>
                         <h3>All Customers</h3>
-                        <table>
+                        <table class="table table-hover my-0">
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
@@ -116,7 +94,6 @@
                         </table>
                     </c:otherwise>
                 </c:choose>
-
             </main>
             <jsp:include page="/includes/footer.jsp" />
         </div>

@@ -11,7 +11,7 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
-    <link href="css/app.css" rel="stylesheet">
+    <link href="css/light.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <title>Update Customer Information</title>
 </head>
@@ -81,7 +81,7 @@
                             </div>
                         </div>
                         <div class="text-center mb-3">
-                            <a href="CustomerList.jsp">Back to Customer List</a>
+                            <a href="customer">Back to Customer List</a>
                         </div>
                     </div>
                 </div>

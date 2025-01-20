@@ -106,7 +106,7 @@ public class CustomerServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         switch (action != null ? action : "") {
-            case "create":
+            
                  
             case "update":
 

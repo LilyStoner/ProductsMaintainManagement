@@ -37,6 +37,9 @@
                 <main class="content">
                  
                     
+                    
+                    
+                    
                 </main>
                 <jsp:include page="/includes/footer.jsp" />
 
