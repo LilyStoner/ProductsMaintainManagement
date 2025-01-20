@@ -115,10 +115,10 @@ public class LoginFilter implements Filter {
         if (session == null || (session.getAttribute("accStaff") == null && session.getAttribute("accCus") == null)) {
           
             if (!uri.contains("login") &&!uri.contains("forgotpassword") && !uri.contains("LoginForm.jsp")
-                    && !uri.contains("ForgotPasswordForm.jsp")
+                    && !uri.contains("ForgotPasswordForm.jsp")  && !uri.contains("HomePage.jsp")
                     && !uri.endsWith(".css") && !uri.endsWith(".js")
                     && !uri.endsWith(".png") && !uri.endsWith(".jpg")) {
-                res.sendRedirect("LoginForm.jsp"); 
+                res.sendRedirect("HomePage.jsp"); 
                 return;
             }
         }

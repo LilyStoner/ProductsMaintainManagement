@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,18 +38,19 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="m-sm-3">
+                                        <c:set var="cookie" value="pageContext.cookies"/>
                                         <form action="login" method="post">
                                             <div class="mb-3">
                                                 <label class="form-label">Username</label>
-                                                <input class="form-control form-control-lg"  name="username" placeholder="Enter your username" />
+                                                <input class="form-control form-control-lg"  name="username" placeholder="Enter your username" value="${cookie.cusername.value}" />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Password</label>
-                                                <input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password"  />
+                                                <input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" value="${cookie.cpassword.value}" />
                                             </div>
                                             <div>
                                                 <div class="form-check align-items-center">
-                                                    <input id="customControlInline" type="checkbox" class="form-check-input" value="remember-me" name="remember-me" checked>
+                                                    <input id="customControlInline" type="checkbox" class="form-check-input" value="${cookie.crememberme.value}" name="remember-me" >
                                                     <label class="form-check-label text-small" for="customControlInline">Remember me</label>
                                                 </div>
                                             </div>

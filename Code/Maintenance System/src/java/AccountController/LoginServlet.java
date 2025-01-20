@@ -61,7 +61,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Cookie arr[] = request.getCookies();
+
     }
 
     /**
@@ -82,6 +83,12 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         String rememberme = request.getParameter("remember-me");
 
+        if (username == null || username.trim().isEmpty() || password == null || password.trim().isEmpty()) {
+            request.setAttribute("error", "Username and Password must not be empty!");
+            request.getRequestDispatcher("LoginForm.jsp").forward(request, response);
+            return;
+        }
+
         Staff staff = staffDao.getStaffByUsenamePassword(username, password);
         Customer customer = customerDao.getCustomerByUsenamePassword(username, password);
 
@@ -93,31 +100,35 @@ public class LoginServlet extends HttpServlet {
 
         if (staff != null) {
             session.setAttribute("accStaff", staff);
+            saveCookies(response, username, password, rememberme);
             response.sendRedirect("HomePage.jsp");
         } else if (customer != null) {
             session.setAttribute("accCus", customer);
+            saveCookies(response, username, password, rememberme);
             response.sendRedirect("HomePage.jsp");
         }
 
-// Cookie setup
+    }
+
+    private void saveCookies(HttpServletResponse response, String username, String password, String rememberme) {
         Cookie cusername = new Cookie("cusername", username);
         Cookie cpassword = new Cookie("cpassword", password);
         Cookie crememberme = new Cookie("crememberme", rememberme);
 
-        if (rememberme != null) {
-            cusername.setMaxAge(60 * 60 * 24 * 7); // 7 days
+        if (rememberme != null) { 
+            cusername.setMaxAge(60 * 60 * 24 * 7); 
             cpassword.setMaxAge(60 * 60 * 24 * 7);
             crememberme.setMaxAge(60 * 60 * 24 * 7);
         } else {
-            cusername.setMaxAge(0); // Delete cookie when not remembered
+            cusername.setMaxAge(0); 
             cpassword.setMaxAge(0);
             crememberme.setMaxAge(0);
         }
 
+      
         response.addCookie(cusername);
         response.addCookie(cpassword);
         response.addCookie(crememberme);
-
     }
 
     /**

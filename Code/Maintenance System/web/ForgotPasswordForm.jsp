@@ -36,6 +36,7 @@
                                         </div>
                                        
                                         <a style="color: red">${requestScope.error}</a>
+                                         <a style="color: greenyellow">${requestScope.message}</a>
 
                                         <div class="d-grid gap-2 mt-3">
                                             <button type="submit" class="btn btn-lg btn-primary">Submit</button>
@@ -45,11 +46,7 @@
                                     </form>
 
                                     
-                                    <c:if test="${not empty requestScope.randomPassword}">
-                                        <div style="color: green; margin-top: 10px;">
-                                            <strong>Your new password is: ${requestScope.randomPassword}</strong>
-                                        </div>
-                                    </c:if>
+                                   
 
                                 </div>
                             </div>
