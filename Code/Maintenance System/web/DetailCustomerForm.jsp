@@ -61,6 +61,7 @@
                 </table>
 
                 <br>
+                <a href="update">Update </a>
                 <a href="customer">Back to List</a>
 
             </main>

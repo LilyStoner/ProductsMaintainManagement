@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package ControllerCustomer;
 
 import DAO.CustomerDAO;
@@ -10,44 +9,52 @@ import Model.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
  *
  * @author PC
  */
+@MultipartConfig
 public class CustomerServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CustomerServlet</title>");  
+            out.println("<title>Servlet CustomerServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CustomerServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CustomerServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -55,8 +62,23 @@ public class CustomerServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         CustomerDAO customerDao = new CustomerDAO();
+
+        int totalPages = customerDao.getNumberPage();
+
+        String index = request.getParameter("index");
+        int indexPage = 1;
+        if (index != null && !index.isEmpty()) {
+            try {
+                indexPage = Integer.parseInt(index);
+            } catch (NumberFormatException e) {
+                indexPage = 1;
+            }
+        }
+
+        ArrayList<Customer> listPage = customerDao.getCustomerPage(indexPage);
+
         String action = request.getParameter("action");
 
         switch (action != null ? action : "") {
@@ -68,10 +90,18 @@ public class CustomerServlet extends HttpServlet {
                 break;
 
             case "search":
-                String textSearch = request.getParameter("text");
-                ArrayList<Customer> listSearchCustomer = customerDao.searchCustomerByName(textSearch);
-                request.setAttribute("listSearchCustomer", listSearchCustomer);
-                request.setAttribute("textSearch", textSearch);
+
+                String searchQuery = request.getParameter("text");
+                ArrayList<Customer> searchResult;
+                if (searchQuery != null && !searchQuery.trim().isEmpty()) {
+                    searchResult = customerDao.searchCustomerByName(searchQuery);
+                    if (searchResult.isEmpty()) {
+                        request.setAttribute("searchMessage", "No resault.");
+                    }
+                } else {
+                    searchResult = customerDao.getAllCustomer();
+                }
+                request.setAttribute("listCustomer", searchResult);
                 request.getRequestDispatcher("Customer.jsp").forward(request, response);
                 break;
             case "update":
@@ -80,16 +110,24 @@ public class CustomerServlet extends HttpServlet {
                 request.setAttribute("customer", updateCustomer);
                 request.getRequestDispatcher("UpdateCustomerForm.jsp").forward(request, response);
                 break;
+            case "add":
+
+                request.getRequestDispatcher("AddCustomer.jsp").forward(request, response);
+                break;
+
             default:
-                ArrayList<Customer> listCustomer = customerDao.getAllCustomer();
-                request.setAttribute("listCustomer", listCustomer);
+
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("listCustomer", listPage);
                 request.getRequestDispatcher("Customer.jsp").forward(request, response);
+
                 break;
         }
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -97,14 +135,14 @@ public class CustomerServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-         CustomerDAO customerDao = new CustomerDAO();
+            throws ServletException, IOException {
+        CustomerDAO customerDao = new CustomerDAO();
         String action = request.getParameter("action");
 
         switch (action != null ? action : "") {
 
             case "update":
-
+                // Lay thong tin tu form
                 String id = request.getParameter("customerId");
                 try {
                     int customerId = Integer.parseInt(id);
@@ -114,13 +152,83 @@ public class CustomerServlet extends HttpServlet {
                     String customerEmail = request.getParameter("email");
                     String customerPhone = request.getParameter("phone");
                     String customerAddress = request.getParameter("address");
-                    String customerImage = request.getParameter("image");
+                    // Cap nhat file 
+                    Customer customer = customerDao.getCustomerByID(customerId);
+                    Part filePart = request.getPart("image");
+                    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+                    String customerImage;
+
+                    if (fileName == null || fileName.isEmpty()) {
+                        customerImage = customer.getImage();
+
+                    } else {
+
+                        String uploadPath = getServletContext().getRealPath("") + File.separator + "img" + File.separator + "avatar";
+                        File uploadDir = new File(uploadPath);
+                        if (!uploadDir.exists()) {
+                            uploadDir.mkdirs();
+                        }
+                        filePart.write(uploadPath + File.separator + fileName);
+                        customerImage = "img/avatar/" + fileName;
+                    }
+
+                    // update
                     Customer updateCustomer = new Customer(customerId, username, password, customerName, customerEmail, customerPhone, customerAddress, customerImage);
                     customerDao.updateCustomer(updateCustomer);
-                    response.sendRedirect("customer");
-                } catch (IOException | NumberFormatException e) {
+                    request.setAttribute("mess", "Update sucessfully!");
+                    request.setAttribute("customer", updateCustomer);
 
+                    request.getRequestDispatcher("UpdateCustomerForm.jsp").forward(request, response);
+
+                } catch (IOException | ServletException | NumberFormatException e) {
+
+                    request.setAttribute("error", "An error occurred while updating the customer: " + e.getMessage());
+                    request.getRequestDispatcher("UpdateCustomerForm.jsp").forward(request, response);
                 }
+
+                break;
+
+            case "add":
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                String customerName = request.getParameter("name");
+                String customerEmail = request.getParameter("email");
+                String customerPhone = request.getParameter("phone");
+                String customerAddress = request.getParameter("address");
+               
+                // check exist
+                if (customerDao.getCustomerByUsername(username) != null) {
+                    request.setAttribute("error", "Username is exits!Please choose another username");
+                    request.getRequestDispatcher("AddCustomer.jsp").forward(request, response);
+                    return;
+                }
+                if (customerDao.getCustomerByEmail(customerEmail) != null) {
+                    request.setAttribute("error", "Email is exits!Please choose another email");
+                    request.getRequestDispatcher("AddCustomer.jsp").forward(request, response);
+                    return;
+                }
+                if (customerDao.getCustomerByPhone(customerPhone) != null) {
+                    request.setAttribute("error", "Phone number is exits!Please choose another Phone number");
+                    request.getRequestDispatcher("AddCustomer.jsp").forward(request, response);
+                    return;
+                }
+                // up file img
+
+                Part filePart = request.getPart("image");
+                String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+                String   customerImage;
+                String uploadPath = getServletContext().getRealPath("") + File.separator + "img" + File.separator + "avatar";
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdirs();
+                }
+                filePart.write(uploadPath + File.separator + fileName);
+                customerImage = "img/avatar/" + fileName;
+
+                // add 
+                Customer customer = new Customer(username, password, customerName, customerEmail, customerPhone, customerAddress, customerImage);
+                customerDao.addCustomer(customer);
+                response.sendRedirect("customer");
                 break;
             default:
                 ArrayList<Customer> listCustomer = customerDao.getAllCustomer();
@@ -130,8 +238,9 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

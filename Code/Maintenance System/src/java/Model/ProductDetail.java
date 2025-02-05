@@ -14,12 +14,14 @@ public class ProductDetail {
     private int productDetailID;
     private String productCode;
     private Date purchaseDate;
+    private int customerID;
     private String usernameC;
     private String name;
     private String email;
     private String phone;
     private String address;
     private String productName;
+    
     private int warrantyPeriod;
 
     // Constructor
@@ -41,10 +43,7 @@ public class ProductDetail {
 
     public ProductDetail() {
     }
-    
-    
 
-    // Getters and Setters
     public int getProductDetailID() {
         return productDetailID;
     }
@@ -67,6 +66,14 @@ public class ProductDetail {
 
     public void setPurchaseDate(Date purchaseDate) {
         this.purchaseDate = purchaseDate;
+    }
+
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 
     public String getUsernameC() {
@@ -125,6 +132,7 @@ public class ProductDetail {
         this.warrantyPeriod = warrantyPeriod;
     }
 
+   
     @Override
     public String toString() {
         return "ProductDetail{" + "productDetailID=" + productDetailID + ", productCode=" + productCode + ", purchaseDate=" + purchaseDate + ", usernameC=" + usernameC + ", name=" + name + ", email=" + email + ", phone=" + phone + ", address=" + address + ", productName=" + productName + ", warrantyPeriod=" + warrantyPeriod + '}';

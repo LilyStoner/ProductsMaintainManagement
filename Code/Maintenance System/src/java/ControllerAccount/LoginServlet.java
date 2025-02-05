@@ -98,11 +98,11 @@ public class LoginServlet extends HttpServlet {
         }
 
         if (staff != null) {
-            session.setAttribute("accStaff", staff);
+            session.setAttribute("staff", staff);
             saveCookies(response, username, password, rememberme);
             response.sendRedirect("HomePage.jsp");
         } else if (customer != null) {
-            session.setAttribute("accCus", customer);
+            session.setAttribute("customer", customer);
             saveCookies(response, username, password, rememberme);
             response.sendRedirect("HomePage.jsp");
         }
