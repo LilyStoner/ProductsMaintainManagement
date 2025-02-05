@@ -224,7 +224,8 @@ public class CustomerServlet extends HttpServlet {
                 }
                 filePart.write(uploadPath + File.separator + fileName);
                 customerImage = "img/avatar/" + fileName;
-
+                // Encrytion Password
+                
                 // add 
                 Customer customer = new Customer(username, password, customerName, customerEmail, customerPhone, customerAddress, customerImage);
                 customerDao.addCustomer(customer);
