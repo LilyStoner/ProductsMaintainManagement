@@ -39,7 +39,7 @@
                         <input type="text" name="email" placeholder="Search by email" value="${searchEmail}" />
                         <button type="submit">Search</button>
                     </form>
-                   
+
                     <!-- Create Button -->
                     <div style="margin-bottom: 20px;">
                         <a href="customer?action=add" class="btn btn-primary">Create New Customer</a>
@@ -63,7 +63,7 @@
                             <c:choose>
                                 <c:when test="${not empty searchMessage}">
                                     <tr>
-                                        <td colspan="7" class="text-center">${searchMessage}</td>
+                                        <td colspan="8" class="text-center">${searchMessage}</td>
                                     </tr>
                                 </c:when>
                                 <c:when test="${not empty listCustomer}">
@@ -85,19 +85,21 @@
                                 </c:when>
                                 <c:otherwise>
                                     <tr>
-                                        <td colspan="7" class="text-center">No result.</td>
+                                        <td colspan="8" class="text-center">No result.</td>
                                     </tr>
                                 </c:otherwise>
                             </c:choose>
                         </tbody>
                     </table>
-
                     <div class="text-center">
                         <c:forEach begin="1" end="${totalPages}" var="i">
-                            <a href="customer?index=${i}" class="pagination-link">${i}</a>
-                        </c:forEach>
-                    </div> 
-                   
+                            <a href="customer?action=advancedSearch&index=${i}&name=${searchName}&gender=${searchGender}&email=${searchEmail}&phone=${searchPhone}&address=${searchAddress}" 
+                               class="pagination-link">${i}</a>
+                        </c:forEach>  
+                    </div>
+                    
+
+
                 </main>
                 <jsp:include page="/includes/footer.jsp" />
             </div>

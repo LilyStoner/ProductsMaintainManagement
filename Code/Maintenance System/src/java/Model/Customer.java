@@ -14,7 +14,7 @@ public class Customer {
     private String usernameC;
     private String passwordC;
     private String name;
-    private String Gender;
+    private String gender;
     private String email;
     private String phone;
     private String address;
@@ -23,23 +23,23 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int customerID, String usernameC, String passwordC, String name, String Gender, String email, String phone, String address, String image) {
+    public Customer(int customerID, String usernameC, String passwordC, String name, String gender, String email, String phone, String address, String image) {
         this.customerID = customerID;
         this.usernameC = usernameC;
         this.passwordC = passwordC;
         this.name = name;
-        this.Gender = Gender;
+        this.gender = gender;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.image = image;
     }
 
-    public Customer(String usernameC, String passwordC, String name, String Gender, String email, String phone, String address, String image) {
+    public Customer(String usernameC, String passwordC, String name, String gender, String email, String phone, String address, String image) {
         this.usernameC = usernameC;
         this.passwordC = passwordC;
         this.name = name;
-        this.Gender = Gender;
+        this.gender = gender;
         this.email = email;
         this.phone = phone;
         this.address = address;
@@ -79,11 +79,11 @@ public class Customer {
     }
 
     public String getGender() {
-        return Gender;
+        return gender;
     }
 
-    public void setGender(String Gender) {
-        this.Gender = Gender;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getEmail() {
@@ -117,6 +117,8 @@ public class Customer {
     public void setImage(String image) {
         this.image = image;
     }
+
+   
 
  
 }
