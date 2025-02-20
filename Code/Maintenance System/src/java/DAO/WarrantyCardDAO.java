@@ -467,19 +467,77 @@ public class WarrantyCardDAO extends DBContext {
      * @return
      */
     public WarrantyCard getWarrantyCardByPhoneAndCode(String phone, String code) {
-        //To code 
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "SELECT wc.WarrantyCardID,\n"
+                + "       wc.WarrantyCardCode,\n"
+                + "	   pd.ProductDetailID,\n"
+                + "	   up.UnknowProductID,\n"
+                + "	   p.Code,\n"
+                + "	   wc.IssueDescription,\n"
+                + "	   wc.WarrantyStatus,\n"
+                + "	   wc.CreatedDate,\n"
+                + "	   wc.ReturnDate,\n"
+                + "	   wc.DoneDate,\n"
+                + "	   wc.CompleteDate,\n"
+                + "	   wc.CancelDate,\n"
+                + "	   p.Image,\n"
+                + "	   p.ProductName,\n"
+                + "	   c.CustomerID,\n"
+                + "	   c.Name,\n"
+                + "	   c.Phone\n"
+                + "\n"
+                + "\n"
+                + "FROM WarrantyCard wc LEFT JOIN WarrantyProduct wp ON wc.WarrantyProductID = wp.WarrantyProductID\n"
+                + "                     \n"
+                + "                     LEFT JOIN ProductDetail pd ON pd.ProductDetailID = wp.ProductDetailID\n"
+                + "					 LEFT JOIN Product p ON p.ProductID = pd.ProductID\n"
+                + "					 LEFT JOIN Customer c ON c.CustomerID = pd.CustomerID\n"
+                + "					 LEFT JOIN UnknowProduct up ON up.CustomerID = c.CustomerID\n"
+                + "					 WHERE c.Phone = ? AND wc.WarrantyCardCode =?\n"
+                + "		 ";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,phone);
+            ps.setString(2,code);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                WarrantyCard warrantyCard = new WarrantyCard();
+                warrantyCard.setWarrantyCardID(rs.getInt("WarrantyCardID"));
+                warrantyCard.setWarrantyCardCode(rs.getString("WarrantyCardCode"));
+                warrantyCard.setProductDetailID(rs.getInt("ProductDetailID"));
+                warrantyCard.setUnknowProductID(rs.getInt("UnknowProductID"));
+                warrantyCard.setProductCode(rs.getString("Code"));
+                warrantyCard.setIssueDescription(rs.getString("IssueDescription"));
+                warrantyCard.setWarrantyStatus(rs.getString("WarrantyStatus"));
+                warrantyCard.setCreatedDate(rs.getDate("CreatedDate"));
+                warrantyCard.setReturnDate(rs.getDate("ReturnDate"));
+                warrantyCard.setDonedDate(rs.getDate("DoneDate"));
+                warrantyCard.setCompletedDate(rs.getDate("CompleteDate"));
+                warrantyCard.setCanceldDate(rs.getDate("CancelDate"));
+                warrantyCard.setImage(rs.getString("Image"));
+                warrantyCard.setProductName(rs.getString("ProductName"));
+                warrantyCard.setCustomerID(rs.getInt("CustomerID"));
+                warrantyCard.setCustomerName(rs.getString("Name"));
+                warrantyCard.setCustomerPhone(rs.getString("Phone"));
+                return warrantyCard;
+                
+            }
+        } catch(SQLException e) {
+            System.out.println(e);
+        }
+        return null;
     }
-    public WarrantyCard getWarrantyCardById (int id) {
-        return getWarrantyCardByField("WarrantyCardID", id+"");
+
+    public WarrantyCard getWarrantyCardById(int id) {
+        return getWarrantyCardByField("WarrantyCardID", id + "");
     }
-    public WarrantyCard getWarrantyCardByCode (String code) {
+
+    public WarrantyCard getWarrantyCardByCode(String code) {
         return getWarrantyCardByField("WarrantyCardCode", code);
     }
-    
+
     private WarrantyCard getWarrantyCardByField(String field, String para) {
 
-        String sql = SELECT_STRING+ "WHERE wc." + field + "=?";
+        String sql = SELECT_STRING + "WHERE wc." + field + "=?";
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -538,8 +596,8 @@ public class WarrantyCardDAO extends DBContext {
 
     public static void main(String[] args) {
         WarrantyCardDAO d = new WarrantyCardDAO();
-        System.out.println(d.getWarrantyCardById(1));
+        WarrantyCard wc = d.getWarrantyCardByPhoneAndCode("0123456018", "WC110");
+        System.out.println(wc.getCustomerPhone());
     }
-
 
 }

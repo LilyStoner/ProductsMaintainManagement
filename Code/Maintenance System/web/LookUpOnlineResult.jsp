@@ -6,6 +6,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,26 +36,29 @@
                                 <th>Product</th>
                                 <th>Create Date</th>
                                 <th>Status</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
-                           
-                               
-                                    <tr>
-                                        <td>${warrantycard.warrantyCardID}</td>
-                                        <td>${warrantycard.warrantyCardCode}</td>
-                                        <td>
-                                           ${warrantycard.productName}
-                                        </td>
-                                       <td>${warrantycard.createdDate}</td>
 
-                                        <td>${warrantycard.warrantyStatus}</td>
-                                       
-                                    </tr>
-                               
-                            
-                           
+
+                            <tr>
+                                <td>${warrantycard.warrantyCardID}</td>
+                                <td>${warrantycard.warrantyCardCode}</td>
+                                <td>
+                                    ${warrantycard.productName}
+                                </td>
+                                <td>
+                                    <fmt:formatDate value="${warrantycard.createdDate}" pattern="dd-MM-yyyy"/>
+                                </td>
+
+
+                                <td>${warrantycard.warrantyStatus}</td>
+
+                            </tr>
+
+
+
                         </tbody>
                     </table>
 

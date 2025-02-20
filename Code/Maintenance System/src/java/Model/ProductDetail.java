@@ -23,6 +23,7 @@ public class ProductDetail {
     private String phone;
     private String address;
     private String productName;
+    private String code;
     private int warrantyPeriod;
     private int WarrantyCardID;
     private String WarrantyCardCode;
@@ -59,47 +60,6 @@ public class ProductDetail {
         this.WarrantyStatus = WarrantyStatus;
         
     }
-
-    public String getUnknownProductName() {
-        return unknownProductName;
-    }
-
-    public void setUnknownProductName(String UnknownProductName) {
-        this.unknownProductName = UnknownProductName;
-    }
-    
-    public String getCreatedDate() {
-        return outputFormat.format(CreatedDate);
-    }
-
-    public void setCreatedDate(Date CreatedDate) {
-        this.CreatedDate = CreatedDate;
-    }
-    
-    public String getWarrantyCardCode() {
-        return WarrantyCardCode;
-    }
-
-    public void setWarrantyCardCode(String WarrantyCardCode) {
-        this.WarrantyCardCode = WarrantyCardCode;
-    }
-
-    public String getIssueDescription() {
-        return IssueDescription;
-    }
-
-    public void setIssueDescription(String IssueDescription) {
-        this.IssueDescription = IssueDescription;
-    }
-
-    public String getWarrantyStatus() {
-        return WarrantyStatus;
-    }
-
-    public void setWarrantyStatus(String WarrantyStatus) {
-        this.WarrantyStatus = WarrantyStatus;
-    }
-    
 
     public int getProductDetailID() {
         return productDetailID;
@@ -181,6 +141,14 @@ public class ProductDetail {
         this.productName = productName;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     public int getWarrantyPeriod() {
         return warrantyPeriod;
     }
@@ -197,6 +165,47 @@ public class ProductDetail {
         this.WarrantyCardID = WarrantyCardID;
     }
 
+    public String getWarrantyCardCode() {
+        return WarrantyCardCode;
+    }
+
+    public void setWarrantyCardCode(String WarrantyCardCode) {
+        this.WarrantyCardCode = WarrantyCardCode;
+    }
+
+    public String getIssueDescription() {
+        return IssueDescription;
+    }
+
+    public void setIssueDescription(String IssueDescription) {
+        this.IssueDescription = IssueDescription;
+    }
+
+    public String getWarrantyStatus() {
+        return WarrantyStatus;
+    }
+
+    public void setWarrantyStatus(String WarrantyStatus) {
+        this.WarrantyStatus = WarrantyStatus;
+    }
+
+    public Date getCreatedDate() {
+        return CreatedDate;
+    }
+
+    public void setCreatedDate(Date CreatedDate) {
+        this.CreatedDate = CreatedDate;
+    }
+
+    public String getUnknownProductName() {
+        return unknownProductName;
+    }
+
+    public void setUnknownProductName(String unknownProductName) {
+        this.unknownProductName = unknownProductName;
+    }
+
+  
     @Override
     public String toString() {
         return "ProductDetail{" + "productDetailID=" + productDetailID + ", productCode=" + productCode + ", purchaseDate=" + purchaseDate + ", customerID=" + customerID + ", usernameC=" + usernameC + ", name=" + name + ", email=" + email + ", phone=" + phone + ", address=" + address + ", productName=" + productName + ", warrantyPeriod=" + warrantyPeriod + ", WarrantyCardID=" + WarrantyCardID + ", WarrantyCardCode=" + WarrantyCardCode + ", IssueDescription=" + IssueDescription + ", WarrantyStatus=" + WarrantyStatus + ", CreatedDate=" + CreatedDate + ", UnknownProductName=" + unknownProductName + '}';
