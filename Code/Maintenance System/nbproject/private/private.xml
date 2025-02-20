@@ -4,12 +4,6 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/PC/Desktop/Data/ProductsMaintainManagement/Code/Maintenance%20System/src/java/Controller/PurchaseProduct.java</file>
-            <file>file:/C:/Users/PC/Desktop/Data/ProductsMaintainManagement/Code/Maintenance%20System/web/Customer/Customer.jsp</file>
-            <file>file:/C:/Users/PC/Desktop/Data/ProductsMaintainManagement/Code/Maintenance%20System/src/java/DAO/ProductDetailDAO.java</file>
-            <file>file:/C:/Users/PC/Desktop/Data/ProductsMaintainManagement/Code/Maintenance%20System/web/PurchaseProduct.jsp</file>
-        </group>
-        <group>
-            <file>file:/C:/Users/PC/Desktop/Data/ProductsMaintainManagement/Code/Maintenance%20System/src/java/Controller/PurchaseProduct.java</file>
             <file>file:/C:/Users/PC/Desktop/Data/ProductsMaintainManagement/Code/Maintenance%20System/src/java/DAO/CustomerDAO.java</file>
             <file>file:/C:/Users/PC/Desktop/Data/ProductsMaintainManagement/Code/Maintenance%20System/src/java/Model/ProductDetail.java</file>
             <file>file:/C:/Users/PC/Desktop/Data/ProductsMaintainManagement/Code/Maintenance%20System/src/java/DAO/ProductDetailDAO.java</file>
@@ -17,6 +11,14 @@
         </group>
         <group>
             <file>file:/C:/Users/PC/Desktop/Data/ProductsMaintainManagement/Code/Maintenance%20System/src/java/Controller/PurchaseProduct.java</file>
+            <file>file:/C:/Users/PC/Desktop/Data/ProductsMaintainManagement/Code/Maintenance%20System/src/java/DAO/ProductDetailDAO.java</file>
+            <file>file:/C:/Users/PC/Desktop/Data/ProductsMaintainManagement/Code/Maintenance%20System/web/PurchaseProduct.jsp</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/PC/Desktop/Data/ProductsMaintainManagement/Code/Maintenance%20System/src/java/ControllerCustomer/CustomerServlet.java</file>
+            <file>file:/C:/Users/PC/Desktop/Data/ProductsMaintainManagement/Code/Maintenance%20System/src/java/Controller/PurchaseProduct.java</file>
+            <file>file:/C:/Users/PC/Desktop/Data/ProductsMaintainManagement/Code/Maintenance%20System/src/java/DAO/CustomerDAO.java</file>
+            <file>file:/C:/Users/PC/Desktop/Data/ProductsMaintainManagement/Code/Maintenance%20System/web/Customer/Customer.jsp</file>
             <file>file:/C:/Users/PC/Desktop/Data/ProductsMaintainManagement/Code/Maintenance%20System/src/java/DAO/ProductDetailDAO.java</file>
             <file>file:/C:/Users/PC/Desktop/Data/ProductsMaintainManagement/Code/Maintenance%20System/web/PurchaseProduct.jsp</file>
         </group>
