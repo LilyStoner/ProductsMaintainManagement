@@ -1,4 +1,4 @@
-package ControllerAccount;
+package Controller.Account;
 
 import DAO.CustomerDAO;
 import DAO.StaffDAO;
@@ -52,6 +52,7 @@ public class LoginServlet extends HttpServlet {
 
         if (staff != null) {
             session.setAttribute("staff", staff);
+           
             saveCookies(response, username, encryptionPassword, rememberme);
             response.sendRedirect("HomePage.jsp");
         } else if (customer != null) {

@@ -46,7 +46,7 @@ public class ProductDetailDAO extends DBContext {
             sql += " AND p.Code LIKE ?";
         }
         if (purchaseDate != null && !purchaseDate.trim().isEmpty()) {
-            sql += " AND pd.PurchaseDate LIKE ?";
+            sql += " AND pd.PurchaseDate = ?";
         }
         if (searchProductName != null && !searchProductName.trim().isEmpty()) {
             sql += " AND p.ProductName LIKE ?";
@@ -67,7 +67,7 @@ public class ProductDetailDAO extends DBContext {
             }
         }
 
-        sql += " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";  // Phân trang an toàn với SQL Server
+        sql += " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"; 
 
         try {
 
@@ -82,7 +82,7 @@ public class ProductDetailDAO extends DBContext {
                 ps.setString(index++, searchCode);
             }
             if (purchaseDate != null && !purchaseDate.trim().isEmpty()) {
-                ps.setString(index++, "%" + purchaseDate.trim() + "%");
+                ps.setDate(index++, java.sql.Date.valueOf(purchaseDate.trim()));
             }
             if (searchProductName != null && !searchProductName.trim().isEmpty()) {
                 ps.setString(index++, searchProductName);
@@ -156,8 +156,8 @@ public class ProductDetailDAO extends DBContext {
             if (searchCode != null && !searchCode.trim().isEmpty()) {
                 ps.setString(index++, searchCode);
             }
-            if (purchaseDate != null && !purchaseDate.trim().isEmpty()) {
-                ps.setString(index++, "%" + purchaseDate.trim() + "%");
+             if (purchaseDate != null && !purchaseDate.trim().isEmpty()) {
+                ps.setDate(index++, java.sql.Date.valueOf(purchaseDate.trim()));
             }
             if (searchProductName != null && !searchProductName.trim().isEmpty()) {
                 ps.setString(index++, searchProductName);

@@ -1,8 +1,8 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package ControllerCustomer;
+package Controller.Customer;
 
 import DAO.CustomerDAO;
 import Model.Customer;
@@ -124,7 +124,7 @@ public class AddCustomerExcel extends HttpServlet {
                         Date excelDate = dateCell.getDateCellValue();
                         dateOfBirth = new java.sql.Date(excelDate.getTime());
                     } else if (dateCell.getCellType() == Cell.CELL_TYPE_STRING) {
-                        // Nếu ngày tháng lưu dưới dạng chuỗi "dd/MM/yyyy"
+                        
                         String dateStr = dateCell.getStringCellValue().trim();
                         SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
                         SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -132,7 +132,7 @@ public class AddCustomerExcel extends HttpServlet {
                         Date parsedDate = inputFormat.parse(dateStr);
                         String formattedDate = outputFormat.format(parsedDate);
 
-                        // Chuyển sang java.sql.Date
+                        
                         dateOfBirth = java.sql.Date.valueOf(formattedDate.replace("/", "-"));
                     } else {
                         throw new IllegalArgumentException("Invalid date format in Excel!");
@@ -140,7 +140,7 @@ public class AddCustomerExcel extends HttpServlet {
                 } else {
                     throw new IllegalArgumentException("Date cell is empty!");
                 }
-            } catch (Exception e) {
+            } catch (IllegalArgumentException | ParseException e) {
                 e.printStackTrace();
                 request.setAttribute("error", "Invalid date format in Excel!");
                 request.getRequestDispatcher("importExcelCustomer.jsp").forward(request, response);
