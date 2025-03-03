@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String rememberme = request.getParameter("remember-me");
-
+        
         if (username == null || username.trim().isEmpty() || password == null || password.trim().isEmpty()) {
             request.setAttribute("error", "Username and Password must not be empty!");
             request.getRequestDispatcher("LoginForm.jsp").forward(request, response);
@@ -52,11 +52,11 @@ public class LoginServlet extends HttpServlet {
 
         if (staff != null) {
             session.setAttribute("staff", staff);
-            saveCookies(response, username, encryptionPassword, rememberme);
+            saveCookies(response, username, password, rememberme);
             response.sendRedirect("HomePage.jsp");
         } else if (customer != null) {
             session.setAttribute("customer", customer);
-            saveCookies(response, username, encryptionPassword, rememberme);
+            saveCookies(response, username, password, rememberme);
             response.sendRedirect("HomePage.jsp");
         }
     }
